@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DMX Sequencer</title>
+  <link rel="stylesheet" href="ui/dist/semantic.css">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <div ng-app="dmx" class="ui container">
+    <h1>DMX Sequencer</h1>
+
+    <sequencer></sequencer>
+
+    <form class="ui form" ng-if="false">
+      <div class="field">
+        <label for="value">Value</label>
+        <input type="text" id="value" name="value" class="ui">
+      </div>
+
+      <div class="ui dropdown">
+        <input type="hidden" name="gender">
+        <i class="dropdown icon"></i>
+        <div class="default text">Gender</div>
+        <div class="menu">
+          <div class="item" data-value="male">Male</div>
+          <div class="item" data-value="female">Female</div>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <script src="node_modules/socket.io-client/socket.io.js"></script>
+  <script src="node_modules/angular/angular.js"></script>
+  <script src="src/script.js"></script>
+</body>
+</html>

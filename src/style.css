@@ -1,0 +1,40 @@
+.control-title {
+    border: 1px solid darkgray;
+    height: 100px;
+}
+.timeline > div {
+    border-right: 1px solid black;
+}
+.sequencer {
+    position: relative;
+}
+.ui.grid > .wide.column {
+    padding: 0;
+}
+.marker {
+    /*background-color: rgba(192,0,0,0.2);*/
+    border: 2px solid red;
+    height: 100%;
+    left: 0;
+    position: relative;
+}
+.marker.active {
+    transition: left 1s linear;
+}
+
+timebar {
+    pointer-events: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+timebar .ui.grid {
+    height: 100%;
+    margin: 0;
+}
+
+.ui.table thead th:nth-child(2n) {
+    background: rgba(0,0,0,0.05);
+}
