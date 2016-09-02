@@ -11,6 +11,9 @@ angular.module('dmx', [])
   .service('TimeService', function () {
     this.time = { current: -1 };
   })
+  .service('EditService', function () {
+    this.isEditing = false;
+  })
   .component('timebar', {
     template: `
 <div class="ui grid">
@@ -49,13 +52,6 @@ angular.module('dmx', [])
     </thead>
     <tbody>
       <tr class="center aligned">
-        <th class="right aligned">Pan</th>
-        <td class="one wide" ng-repeat="measure in $ctrl.data track by $index" ng-style="{ color: color }">
-          {{measure.pan}}
-        </td>
-      </tr>
-  
-      <tr class="center aligned">
         <th class="right aligned">Color</th>
         <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
           <color value="measure.color" measure="$index"></color>
@@ -65,7 +61,28 @@ angular.module('dmx', [])
       <tr class="center aligned">
         <th class="right aligned">Gobo</th>
         <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
-          {{measure.gobo}}
+          <gobo value="measure.gobo"></gobo>
+        </td>
+      </tr>
+      
+      <tr class="center aligned">
+        <th class="right aligned">Pan</th>
+        <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
+          {{measure.pan}}
+        </td>
+      </tr>
+      
+      <tr class="center aligned">
+        <th class="right aligned">Tilt</th>
+        <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
+          {{measure.tilt}}
+        </td>
+      </tr>
+      
+      <tr class="center aligned">
+        <th class="right aligned">Strobe</th>
+        <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
+          {{measure.strobe}}
         </td>
       </tr>
     </tbody>
@@ -74,8 +91,10 @@ angular.module('dmx', [])
 </div>
 <buttons data="$ctrl.data"></buttons>
 `,
-    controller: function ($http) {
+    controller: function ($http, EditService) {
       var $ctrl = this;
+
+      $ctrl.isEditing = EditService.isEditing;
 
       $http.get('data.json').then(function (result) {
         $ctrl.data = result.data;
@@ -146,18 +165,32 @@ angular.module('dmx', [])
 
     }
   })
+  .component('gobo', {
+    bindings: {
+      goboId: '=value',
+      measure: '='
+    },
+    template: `
+    <img ng-src="images/{{$ctrl.goboId}}.png">
+`,
+    controller: function () {
+      var $ctrl = this;
+    }
+  })
   .component('color', {
     bindings: {
       color: '=value',
       measure: '='
     },
     template: `
-<div ng-click="$ctrl.setColor()" ng-style="{ color: $ctrl.color }">{{$ctrl.color}}</div>
+<div ng-click="$ctrl.setColor()" ng-style="{ color: $ctrl.color }">
+  <input type="color" ng-model="$ctrl.color">
+</div>
 `,
-    controller: function () {
+    controller: function (EditService) {
       var $ctrl = this;
       $ctrl.setColor = function () {
-        console.log('color?');
+        EditService.isEditing = true;
       }
     }
   });
