@@ -1,3 +1,6 @@
+.ui.container {
+    width: 95%; /* ignore max width */
+}
 .control-title {
     border: 1px solid darkgray;
     height: 100px;
@@ -41,4 +44,7 @@ timebar .ui.grid {
 
 .ui.table thead th:nth-child(2n) {
     background: rgba(0,0,0,0.05);
+}
+[type="range"] {
+    width: 100%;
 }

@@ -4,14 +4,14 @@
     "gobo": 1,
     "pan": 0,
     "tilt": 25,
-    "strobe": 0
+    "strobe": "100"
   },
   {
     "color": "#EF7945",
     "gobo": 1,
     "pan": 0,
     "tilt": 10,
-    "strobe": 0
+    "strobe": "50"
   },
   {
     "color": "#0095B7",

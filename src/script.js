@@ -68,21 +68,21 @@ angular.module('dmx', [])
       <tr class="center aligned">
         <th class="right aligned">Pan</th>
         <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
-          {{measure.pan}}
+          <input type="range" min="0" max="100" ng-model="measure.pan">
         </td>
       </tr>
       
       <tr class="center aligned">
         <th class="right aligned">Tilt</th>
         <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
-          {{measure.tilt}}
+          <input type="range" min="0" max="100" ng-model="measure.tilt">
         </td>
       </tr>
       
       <tr class="center aligned">
         <th class="right aligned">Strobe</th>
         <td class="one wide" ng-repeat="measure in $ctrl.data track by $index">
-          {{measure.strobe}}
+          <input type="range" min="0" max="100" ng-model="measure.strobe">
         </td>
       </tr>
     </tbody>
@@ -183,7 +183,7 @@ angular.module('dmx', [])
       measure: '='
     },
     template: `
-<div ng-click="$ctrl.setColor()" ng-style="{ color: $ctrl.color }">
+<div ng-style="{ color: $ctrl.color }">
   <input type="color" ng-model="$ctrl.color">
 </div>
 `,
