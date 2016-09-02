@@ -1,0 +1,72 @@
+[
+  {
+    "color": "magenta",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "red",
+    "gobo": 2,
+    "pan": 2
+  },
+  {
+    "color": "blue",
+    "gobo": 3,
+    "pan": 1
+  },
+  {
+    "color": "magenta",
+    "gobo": 4,
+    "pan": 1
+  },
+  {
+    "color": "red",
+    "gobo": 5,
+    "pan": 1
+  },
+  {
+    "color": "blue",
+    "gobo": 2,
+    "pan": 1
+  },
+  {
+    "color": "magenta",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "red",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "blue",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "magenta",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "red",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "blue",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "orange",
+    "gobo": 1,
+    "pan": 1
+  },
+  {
+    "color": "green",
+    "gobo": 1,
+    "pan": 1
+  }
+]

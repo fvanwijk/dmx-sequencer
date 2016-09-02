@@ -1,23 +1,22 @@
 
 angular.module('dmx', [])
   .service('SocketService', function () {
-    //var socket = io('http://localhost:4000');
+    var socket = io('http://localhost:4000');
 
     this.send = function (data) {
-      console.log(data);
-      //socket.emit('tick', data);
+      socket.emit('tick', data);
     }
 
   })
   .service('TimeService', function () {
-    this.time = { current: 0 };
+    this.time = { current: -1 };
   })
   .component('timebar', {
     template: `
 <div class="ui grid">
   <div class="two wide column"></div>
   <div class="fourteen wide column marker-column">
-    <div class="marker" ng-class="{ isPlaying: 'active' }" style="left: {{$ctrl.time.current/14*100}}%; width: {{100/14}}%"></div>
+    <div ng-show="$ctrl.time.current > -1" class="marker" ng-class="{ isPlaying: 'active' }" style="left: {{$ctrl.time.current/14*100}}%; width: {{100/14}}%"></div>
   </div>
 </div>
 `,
@@ -75,79 +74,12 @@ angular.module('dmx', [])
 </div>
 <buttons data="$ctrl.data"></buttons>
 `,
-    controller: function () {
-      this.data = [
-        {
-          "color": "magenta",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "red",
-          "gobo": 2,
-          "pan": 2
-        },
-        {
-          "color": "blue",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "magenta",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "red",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "blue",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "magenta",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "red",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "blue",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "magenta",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "red",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "blue",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "orange",
-          "gobo": 1,
-          "pan": 1
-        },
-        {
-          "color": "green",
-          "gobo": 1,
-          "pan": 1
-        }
-      ];
+    controller: function ($http) {
+      var $ctrl = this;
+
+      $http.get('data.json').then(function (result) {
+        $ctrl.data = result.data;
+      });
     }
   })
   .component('buttons', {
@@ -175,7 +107,7 @@ angular.module('dmx', [])
       var interval;
 
       $ctrl.sendCommand = function (measure) {
-        console.log(measure);
+        //console.log('sendcommand', measure, $ctrl.data[measure]);
         SocketService.send($ctrl.data[measure])
       };
 
@@ -183,7 +115,7 @@ angular.module('dmx', [])
         $ctrl.isPlaying = true;
         interval = $interval(function () {
           $ctrl.time.current = ($ctrl.time.current+1)%14;
-          $ctrl.sendCommand($ctrl.time.current-1);
+          $ctrl.sendCommand($ctrl.time.current);
         }, 1000);
       };
 
@@ -197,7 +129,7 @@ angular.module('dmx', [])
 
       $ctrl.stop = function () {
         $ctrl.pause();
-        $ctrl.time.current = 0;
+        $ctrl.time.current = -1;
       };
 
       $scope.$on('$destroy', function() {
